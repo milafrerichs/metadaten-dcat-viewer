@@ -1,13 +1,12 @@
 {
-  "name": "offenedatenberatung.de",
+  "name": "metadatenviewer",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "",
   "license": "MIT",
   "dependencies": {
     "postcss-cli": "^7",
     "tailwind-heropatterns": "0.0.8",
-    "tailwindcss-spaced-items": "^0.1.0",
-    "alpine": "^2.0.0"
+    "tailwindcss-spaced-items": "^0.1.0"
   },
   "scripts": {
     "start": "hugo --gc"
