@@ -2,6 +2,7 @@ baseURL = ""
 languageCode = "de-DE"
 title = "Metadaten Viewer"
 enableEmoji = true
+timeout=30000
 
 [params]
 description = ""
