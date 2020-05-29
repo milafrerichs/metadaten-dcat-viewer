@@ -11,7 +11,6 @@ html lang=en
     {{ end }}
     meta name="description" content="{{ if or (.IsHome) (not (isset .Params "description")) -}} {{ $.Site.Params.description }} {{- else -}} {{ .Description }} {{- end }}"
     title {{ if .IsHome -}} {{ .Site.Title }} {{- else -}} {{ .Title }} – {{ .Site.Title }} {{- end }}
-    {{ partial "vega" }}
     {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/twitter_cards.html" . }}
   body
@@ -20,5 +19,3 @@ html lang=en
       = yield header
       = yield main
     = yield footer
-    script type="text/javascript" src="/js/main.js"
-    script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
