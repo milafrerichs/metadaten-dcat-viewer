@@ -1,0 +1,61 @@
+{{ $dataJ := getJSON $.Page.Params.api_package_url }}
+
+{{ $packages := index $dataJ "result"}}
+
+<div class="relative bg-gray-50 pt-16 pb-20 lg:pt-24 lg:pb-28">
+  <div class="relative max-w-7xl mx-auto">
+{{ range $packages }}
+	{{ $package := getJSON $.Page.Params.api_url "?id=" . }}
+	{{ $result := index $package "result"}}
+	{{ range $result}}
+		<div class="bg-white shadow overflow-hidden sm:rounded-lg mt-8">
+  <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+			{{.title}}
+    </h3>
+    <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+			{{.notes}}
+    </p>
+  </div>
+  <div>
+    <dl>
+			{{ range $key, $value := . }}
+      <div class="odd:bg-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 border-t-1">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+					{{$key}}
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+					{{ if in (slice "groups" "extras" "resources" "tags") $key }}
+						{{if eq $key "extras"}}
+							<ul>
+								{{ range $value.dates }}
+								<li> {{.role}}: {{.date}}</li>
+								{{end}}
+								<li> {{$value.contacts.name}}: {{$value.contacts.email}}</li>
+						</ul>
+						{{end}}
+						{{ range $value }}
+							{{if eq $key "groups"}}
+								{{.}}
+							{{end}}
+							{{if eq $key "tags"}}
+								{{.}}
+							{{end}}
+							{{if eq $key "resources"}}
+								{{.url}} ({{.format}})
+							{{end}}
+						{{end}}
+					{{else}}
+						{{$value}}
+					{{end}}
+        </dd>
+      </div>
+			{{end}}
+    </dl>
+  </div>
+</div>	
+	{{end}}
+{{ end}}
+    </div>
+  </div>
+</div>
